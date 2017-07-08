@@ -1,0 +1,27 @@
+# -*- coding:utf-8 -*-
+from mainframe.ecstrategy import ECTradeStrategy
+
+
+class TradeStrategy_$name(ECTradeStrategy):
+    async def init(self):
+        # Init strategy, like setting up index you need.
+        # By default, your strategy will be called every seconds.
+        # If set period to 0, the strategy will only be called once.
+        self.period = 1000 # msecond.
+
+    async def cold_start(self):
+        """
+        Will only be called once before the first time the strategy run.
+        It is strongly recommended to 'warming up'  the indexes for the
+        sake of accuracy.
+        :return:
+        """
+        pass
+
+    async def process(self):
+        # Write your strategy here.
+        # Good hunting :)
+        pass
+
+
+EXPORT = TradeStrategy_$name

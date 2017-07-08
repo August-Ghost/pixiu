@@ -1,0 +1,55 @@
+# -*- coding: utf-8 -*-
+from mainframe.ecdatasource import ECDataSource
+
+
+class ECDataSource_$name(ECDataSource):
+    def config(self):
+        self.configure = {
+            "name": "$name",  # Required. Your strategy need this to get data.
+
+            # Remove the comment if you want to deliver logs into separated files.
+            # By default, logs will be delivered into log/ECDatasource_error.log
+            # and log/ECDatasource_debug.log
+            #"datasource_logging":{
+            #    "if_debug": False,
+            #   # Optional, the debug log file. If ignored, default will be "log/ECDataSource.$name_debug.log"
+            #    "dbglog": r"",
+            #    # Optional, the errorlog file. If ignored, default will be "log/ECDataSource.$name_error.log"
+            #    "errlog": r"",
+            #},
+            # Remove the comment if you want to deliver logs into separated files.
+            # By default, logs will be delivered into log/ECInterface_error.log
+            # and log/ECInterface_debug.log
+            #"interface_logging": {
+            #    "if_debug": False,
+            #    # Optional, the debug log file. If ignored, default will be "log/ECInterface.$name_debug.log"
+            #    "dbglog": r"",
+            #    # Optional, the debug log file. If ignored, default will be "log/ECInterface.$name_error.log"
+            #    "errlog": r"",
+            #},
+
+            "query_config":{
+                "url": r"", # The url to fetch data.
+                "method": "GET"
+                # For more additional parameters, please refer to:
+                # http://www.tornadoweb.org/en/stable/httpclient.html#request-objects
+            },
+        }
+
+    def after_init(self):
+        """
+        Will be called after datasource initiated.
+        :return:
+        """
+        pass
+
+    async def __call__(self, **kargs):
+        # Overwrite it if you need some hacks while calling datasource.
+        return super(ECDataSource, self).__call__(**kargs)
+
+    async def process_response(self, response):
+        # Overwrite it if additional workaround is necessary to process response.
+        return response
+
+
+EXPORT = ECDataSource_$name
